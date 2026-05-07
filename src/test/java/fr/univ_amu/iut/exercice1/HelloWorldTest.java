@@ -25,7 +25,7 @@ class HelloWorldTest {
 
   // ========= Salutation par défaut =========
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_sans_nom_retourne_hello_world() {
     assertThat(HelloWorld.saluer(null)).isEqualTo("Hello, World!");
