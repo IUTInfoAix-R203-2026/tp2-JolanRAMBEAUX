@@ -47,6 +47,92 @@ public class ConvertisseurDeNombreRomain {
     //
     // Pour les exceptions : une soustraction est valide seulement pour
     // I avant V/X, X avant L/C, C avant D/M. Tout le reste est invalide.
+    for (int i = 0; i < chiffreRomain.length(); i++) {
+      switch (chiffreRomain.charAt(i)) {
+        case 'I':
+          total += 1;
+          break;
+        case 'V':
+          if (i > 0) {
+            char precedent = chiffreRomain.charAt(i - 1);
+            if (precedent == 'I') {
+              total += 3;
+              break;
+            }
+          }
+          total += 5;
+          break;
+        case 'X':
+          if (i > 0) {
+            char precedent = chiffreRomain.charAt(i - 1);
+            if (precedent == 'I') {
+              total += 8;
+              break;
+            } else if (precedent == 'V') {
+              throw new IllegalArgumentException();
+            }
+          }
+          total += 10;
+          break;
+        case 'L':
+          if (i > 0) {
+            char precedent = chiffreRomain.charAt(i - 1);
+            if (precedent == 'X') {
+              total += 30;
+              break;
+            } else if (precedent == 'V' || precedent == 'I') {
+              throw new IllegalArgumentException();
+            }
+          }
+          total += 50;
+          break;
+        case 'C':
+          if (i > 0) {
+            char precedent = chiffreRomain.charAt(i - 1);
+            if (precedent == 'X') {
+              total += 80;
+              break;
+            } else if (precedent == 'L' || precedent == 'V' || precedent == 'I') {
+              throw new IllegalArgumentException();
+            }
+          }
+          total += 100;
+          break;
+        case 'D':
+          if (i > 0) {
+            char precedent = chiffreRomain.charAt(i - 1);
+            if (precedent == 'C') {
+              total += 300;
+              break;
+            } else if (precedent == 'L'
+                || precedent == 'V'
+                || precedent == 'I'
+                || precedent == 'X') {
+              throw new IllegalArgumentException();
+            }
+          }
+          total += 500;
+          break;
+        case 'M':
+          if (i > 0) {
+            char precedent = chiffreRomain.charAt(i - 1);
+            if (precedent == 'C') {
+              total += 800;
+              break;
+            } else if (precedent == 'L'
+                || precedent == 'V'
+                || precedent == 'I'
+                || precedent == 'X'
+                || precedent == 'D') {
+              throw new IllegalArgumentException();
+            }
+          }
+          total += 1000;
+          break;
+        default:
+          throw new IllegalArgumentException();
+      }
+    }
     return total;
   }
 }
