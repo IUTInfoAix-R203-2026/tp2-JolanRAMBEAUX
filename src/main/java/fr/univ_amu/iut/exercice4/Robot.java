@@ -36,16 +36,58 @@ public class Robot {
     // TODO exercice 4 : implémenter la rotation horaire.
     // Astuce : profitez de l'ordre NORD → EST → SUD → OUEST → NORD
     // (les valeurs de l'enum sont déjà dans le sens horaire).
+    switch (getOrientation()) {
+      case NORD:
+        this.orientation = Orientation.EST;
+        break;
+      case EST:
+        this.orientation = Orientation.SUD;
+        break;
+      case SUD:
+        this.orientation = Orientation.OUEST;
+        break;
+      case OUEST:
+        this.orientation = Orientation.NORD;
+        break;
+    }
   }
 
   /** Fait pivoter le robot d'un quart de tour vers sa gauche (sens antihoraire). */
   public void tournerAGauche() {
     // TODO exercice 4 : implémenter la rotation antihoraire.
+    switch (orientation) {
+      case NORD:
+        this.orientation = Orientation.OUEST;
+        break;
+      case EST:
+        this.orientation = Orientation.NORD;
+        break;
+      case SUD:
+        this.orientation = Orientation.EST;
+        break;
+      case OUEST:
+        this.orientation = Orientation.SUD;
+        break;
+    }
   }
 
   /** Avance le robot d'une case dans la direction de son orientation courante. */
   public void avancer() {
     // TODO exercice 4 : implémenter le déplacement d'une case.
     // NORD → y+1, EST → x+1, SUD → y-1, OUEST → x-1
+    switch (orientation) {
+      case NORD:
+        this.position = new Position(this.position.x(), this.position.y() + 1);
+        break;
+      case EST:
+        this.position = new Position(this.position.x() + 1, this.position.y());
+        break;
+      case SUD:
+        this.position = new Position(this.position.x(), this.position.y() - 1);
+        break;
+      case OUEST:
+        this.position = new Position(this.position.x() - 1, this.position.y());
+        break;
+    }
   }
 }
